@@ -86,10 +86,11 @@ module.exports = {
     deleteFriend({ params }, res) {
         User.findOneAndUpdate(
             { _id: params.userId },
-            { $pull: { friends: { friendId: params.friendId } } },
+            { $pull: { friends: params.friendId  } },
             { new: true }
         )
             .then(userData => {
+
                 if (!userData) {
                     return res.status(404).json({ message: 'No user with this id!' });
                 }
